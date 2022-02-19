@@ -1,5 +1,5 @@
 import { Atom, Nucleus, Linker, Reducer } from './types.ts'
-import { assert } from '../dep/frugal/assert.ts'
+import { assert } from '../dep/std/asserts.ts'
 import { BaseNucleus } from './BaseNucleus.ts'
 import { ReducerAtom } from './ReducerAtom.ts'
 import { StateAtom } from './StateAtom.ts'
