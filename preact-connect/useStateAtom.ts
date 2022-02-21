@@ -3,7 +3,7 @@ import * as hooks from 'preact/hooks';
 import { StateAtom, Set } from '../store/StateAtom.ts';
 import { useRerender } from './useRerender.ts'
 
-export function useStateAtom<STATE extends object>(
+export function useStateAtom<STATE>(
     atom: StateAtom<STATE>,
 ): [STATE, (state: Set<STATE>) => void] {
     const rerender = useRerender();

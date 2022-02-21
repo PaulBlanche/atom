@@ -1,6 +1,6 @@
 import type { Reducer, ChangeHandler, Nucleus } from './types.ts'
 
-export class BaseNucleus<STATE extends object, ACTION extends object> implements Nucleus<STATE, ACTION> {
+export class BaseNucleus<STATE, ACTION> implements Nucleus<STATE, ACTION> {
     state: STATE;
     reducer: Reducer<STATE, ACTION>;
     handlers: ChangeHandler<STATE>[];

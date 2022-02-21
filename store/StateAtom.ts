@@ -1,9 +1,9 @@
 import { BaseAtom } from './BaseAtom.ts'
 import { Linker, ChangeHandler } from './types.ts'
 
-export type Set<STATE extends object> = STATE | ((state: STATE) => STATE);
+export type Set<STATE> = STATE | ((state: STATE) => STATE);
 
-export class StateAtom<STATE extends object> extends BaseAtom<STATE, STATE> {
+export class StateAtom<STATE> extends BaseAtom<STATE, STATE> {
     constructor(
         linker: Linker,
         addEventListener: (handler: ChangeHandler<STATE>) => void,
@@ -14,8 +14,11 @@ export class StateAtom<STATE extends object> extends BaseAtom<STATE, STATE> {
 
     set(state: Set<STATE>) {
         this.linker.getNucleusOf<STATE, STATE>(this).dispatch(
-            typeof state === 'function' ? state(this.state()) : state,
+            isSetter(state) ? state(this.state()) : state,
         );
     }
 }
 
+function isSetter<STATE>(state: Set<STATE>): state is ((state: STATE) => STATE) {
+    return typeof state === 'function'
+}

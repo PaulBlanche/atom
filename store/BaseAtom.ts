@@ -1,6 +1,6 @@
 import { Linker, ChangeHandler, Atom } from './types.ts'
 
-export class BaseAtom<STATE extends object, ACTION extends object> implements Atom<STATE, ACTION> {
+export class BaseAtom<STATE, ACTION> implements Atom<STATE, ACTION> {
     protected linker: Linker;
     addEventListener: (handler: ChangeHandler<STATE>) => void;
     removeEventListener: (handler: ChangeHandler<STATE>) => void;

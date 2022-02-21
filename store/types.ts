@@ -1,13 +1,15 @@
-export type ChangeHandler<STATE extends object> = (state: STATE) => void;
-export type Reducer<STATE extends object, ACTION extends object> = (state: STATE, action: ACTION) => STATE;
+export type ChangeHandler<STATE> = (state: STATE) => void;
+export type Reducer<STATE, ACTION> = (state: STATE, action: ACTION) => STATE;
 
-export interface Nucleus<STATE extends object, ACTION extends object> {
+export interface Nucleus<STATE, ACTION> {
     state: STATE,
     dispatch: (action: ACTION) => void
 }
 
-export interface Atom<STATE extends object, ACTION extends object> {}
+export interface Atom<STATE, ACTION> {
+    state(): STATE
+}
 
 export interface Linker {
-    getNucleusOf<STATE extends object, ACTION extends object>(atom: Atom<STATE, ACTION>): Nucleus<STATE, ACTION>
+    getNucleusOf<STATE, ACTION>(atom: Atom<STATE, ACTION>): Nucleus<STATE, ACTION>
 }
