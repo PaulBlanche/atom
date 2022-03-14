@@ -9,7 +9,7 @@ export class Store implements Linker {
     // atoms and nucleus to be stored while not having to explicitly cast when 
     // setting/getting.  
     // deno-lint-ignore no-explicit-any
-    container: Map<Atom<any, any>, Nucleus<any, any>>;
+    private container: Map<Atom<any, any>, Nucleus<any, any>>;
 
     constructor() {
         this.container = new Map();

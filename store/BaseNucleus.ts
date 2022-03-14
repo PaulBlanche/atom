@@ -5,8 +5,8 @@ export class BaseNucleus<STATE, ACTION> implements Nucleus<STATE, ACTION> {
     reducer: Reducer<STATE, ACTION>;
     handlers: ChangeHandler<STATE>[];
 
-    constructor(intialState: STATE, reducer: Reducer<STATE, ACTION>) {
-        this.state = intialState;
+    constructor(initialState: STATE, reducer: Reducer<STATE, ACTION>) {
+        this.state = initialState;
         this.reducer = reducer;
         this.handlers = [];
     }
