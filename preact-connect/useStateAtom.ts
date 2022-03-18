@@ -1,17 +1,23 @@
 import * as hooks from 'preact/hooks';
 
-import { StateAtom, Set } from '../store/StateAtom.ts';
-import { useRerender } from './useRerender.ts'
+import { Set, StateAtom } from '../store/mod.ts';
+import { useRerender } from './useRerender.ts';
+import { useStore } from './useStore.ts';
 
-export function useStateAtom<STATE>(
+export type UseStateAtom<STATE> = [STATE, (state: Set<STATE>) => void];
+
+export function useStateAtom<STATE, SELECTED = STATE>(
     atom: StateAtom<STATE>,
-): [STATE, (state: Set<STATE>) => void] {
+    initialState: STATE
+): UseStateAtom<STATE> {
     const rerender = useRerender();
+    const store = useStore();
+
+    const wiredAtom = store.wire(atom, initialState);
 
     hooks.useEffect(() => {
-        return atom.addChangeListener(rerender);
+        return wiredAtom.addChangeListener(rerender);
     }, []);
 
-    return [atom.state(), atom.set.bind(atom)];
+    return [wiredAtom.state(), wiredAtom.set.bind(wiredAtom)];
 }
-
